@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <script>
+        function getComputerChoice() {
+            const hands = ['Rock', 'Paper', 'Scissors'];
+            const random = Math.floor(Math.random() * hands.length);
+            return hands[random];
+        }
+
+        function playRound(playerSelection,computerSelection) {
+            
+            if(playerSelection === 'Rock' && computerSelection === 'Scissors') {
+                return("You win! Rock beats scissors.");
+            }   else if(playerSelection === 'Rock' && computerSelection === 'Paper') {
+                return("You lose! Paper beats rock.");
+            }   else if(playerSelection === 'Paper' && computerSelection === 'Rock') {
+                return("You win! Paper beats rock.");
+            }   else if(playerSelection === 'Paper' && computerSelection === 'Scissors') {
+                return("You lose! Scissors beat paper.");
+            }   else if(playerSelection === 'Scissors' && computerSelection === 'Paper') {
+                return("You win! Scissors beat paper.");
+            }   else if(playerSelection === 'Scissors' && computerSelection === 'Rock') {
+                return("You lose! Rock beats scissors");
+            }   else {
+                return("It's tied. Both of you picked " + playerSelection + ".");
+            }
+        }
+        
+        function game() {
+            let a = 0;
+            let b = 0;
+            let c = 0;
+
+            let playerSelection = prompt();
+
+            let sliceOne = playerSelection.slice(0,1).toUpperCase();
+            let sliceTwo = playerSelection.slice(1,playerSelection.length).toLowerCase();
+            playerSelection = sliceOne.concat(sliceTwo);
+            
+            if(!(playerSelection === 'Rock' || playerSelection === 'Paper' || playerSelection === 'Scissors')) {
+                console.log("Pick a valid choice.");
+            } else {
+
+            for(let i = 0; i < 5; i++) {
+
+                const computerSelection = getComputerChoice();
+
+                let message = (playRound(playerSelection,computerSelection));
+                console.log(message);
+
+                if(message.search("win") !== -1) {
+                    a++; } else if(message.search("lose") !== -1) {
+                    b++; } else {
+                    c++; }
+            }
+            console.log("You won " + a + " times and lost " + b + " times while tied for " + c + " times.");
+            if(a > b) {
+                console.log("Therefore, you win!");
+            } else if(b > a) {
+                console.log("Therefore, you lose!");
+            } else {
+                console.log("Therefore, you tied!");
+            }
+            }
+        }
+        
+        game();
+
+    </script>
+</body>
+
+</html>
